@@ -1,14 +1,5 @@
 # Obtained from github.com/agurwicz/cmg-macos
 
-########## User defined ##########
-
-# Path to CMG directory in the Mac.
-cmg_local_path=""
-
-#Location of the CMG license.
-cmg_lic_host=""
-
-########## User defined ##########
 ########## Customizable ##########
 
 # Working directory in local machine. Will be mapped to the container.
@@ -37,6 +28,8 @@ function get_container_name {
 		((index++)); container_name="${container_base_name}-${index}"
 	done
 }
+
+source "$(dirname "${0}")/cmgvariables.sh"
 
 get_container_name
 

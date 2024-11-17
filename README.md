@@ -25,9 +25,7 @@ This allows the commands to be called from any directory.
 ### Use
 
 > [!IMPORTANT]
-> Some variables need to be defined in the scripts before running.
-> 
-> These variables and corresponding explanations are listed in the beginning of each file.
+> Before running, the variables located in the [cmgvariables](src/cmgvariables.sh) file need to be defined.
 
 The [cmgrun](src/cmgrun.sh) script runs a simulation in the container and exits, automatically deleting the container.
 The syntax is

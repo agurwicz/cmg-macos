@@ -1,20 +1,5 @@
 # Obtained from github.com/agurwicz/cmg-macos
 
-########## User defined ##########
-
-# Extra parameters to be appended to the end of the simulation running command (e.g. "-jacpar", "-parasol", "-wait").
-cmg_commands=""
-
-# Path to CMG directory in the Mac.
-cmg_local_path=""
-
-# CMG version (e.g. "2023.40").
-cmg_version=""
-
-#Location of the CMG license.
-cmg_lic_host=""
-
-########## User defined ##########
 ########## Customizable ##########
 
 # Which simulator to use. Options are "IMEX", "GEM" and "STARS" (case-insensitive).
@@ -72,6 +57,8 @@ function get_container_name {
 		((index++)); container_name="${container_base_name}-${index}"
 	done
 }
+
+source "$(dirname "${0}")/cmgvariables.sh"source "$(dirname "${0}")/cmgvariables.sh"
 
 check_docker
 get_simulator
