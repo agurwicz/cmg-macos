@@ -1,6 +1,6 @@
 # CMG on macOS
 
-This repository came to exist due to the lack of macOS support by [Computer Modeling Group](https://www.cmgl.ca)'s reservoir simulators.
+This repository came to exist due to the lack of macOS support by [Computer Modelling Group](https://www.cmgl.ca)'s reservoir simulators.
 We make use of [Docker](https://www.docker.com) to indirectly run CMG's Linux distribution on Macs.
 
 We are open to suggestions and contributions to the repository.

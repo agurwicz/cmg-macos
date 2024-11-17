@@ -1,4 +1,4 @@
-# Obtained from github.com/agurwicz/cmg-macos
+# Obtained from https://github.com/agurwicz/cmg-macos.
 
 ########## Customizable ##########
 
