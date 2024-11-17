@@ -7,6 +7,7 @@ cmg_local_path=""
 cmg_lic_host=""
 
 # Extra parameters to be appended to the end of the simulation running command (e.g. "-jacpar", "-parasol", "-wait").
+# Can also be passed as the third argument to the cmgrun script, which takes precedence over this.
 # Not needed for cmgcontainer.
 cmg_commands=""
 

@@ -8,6 +8,11 @@ simulator=${1}
 # Name of the main .dat file.
 model_name=${2}
 
+# Extra parameters to be appended to the end of the simulation running command (e.g. "-jacpar", "-parasol", "-wait").
+# If not defined when calling script, `cmg_commands` defined in the cmgvariables file will be used.
+# Takes precedence over `cmg_commands`.
+user_cmg_commands=${3:-""}
+
 # Working directory in local machine. Will be mapped to the container.
 workdir=${PWD}
 
@@ -34,6 +39,10 @@ function check_variables {
       echo "Variable \"${variable}\" is empty or not defined."; exit 1
     fi
   done
+
+  if [[ ${user_cmg_commands} == "" ]]; then
+    user_cmg_commands=${cmg_commands}
+  fi
 }
 
 function check_docker {
@@ -86,4 +95,4 @@ docker container run \
 --name ${container_name} \
 ${image_name} \
 "${cmg_remote_path}/${simulator_relative_path}" \
--f "${remote_workdir}/${model_name}" -wd "${remote_workdir}" ${cmg_commands}
+-f "${remote_workdir}/${model_name}" -wd "${remote_workdir}" ${user_cmg_commands}
