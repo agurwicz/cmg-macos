@@ -19,6 +19,17 @@ remote_workdir="/workdir"
 
 ########## Customizable ##########
 
+function check_variables {
+  local variables=("$@")
+  local variable
+
+  for variable in "${variables[@]}"; do
+    if [[ -z "${!variable}" ]]; then
+      echo "Variable \"${variable}\" is empty or not defined."; exit 1
+    fi
+  done
+}
+
 function get_container_name {
 	local container_list=$(docker container ls)
 	local index=0
@@ -30,6 +41,7 @@ function get_container_name {
 }
 
 source "$(dirname "${0}")/cmgvariables.sh"
+check_variables "cmg_local_path" "cmg_lic_host"
 
 get_container_name
 
