@@ -20,24 +20,24 @@ remote_workdir="/workdir"
 ########## Customizable ##########
 
 function check_variables {
-  local variables=("$@")
-  local variable
+    local variables=("$@")
+    local variable
 
-  for variable in "${variables[@]}"; do
-    if [[ -z "${!variable}" ]]; then
-      echo "Variable \"${variable}\" is empty or not defined."; exit 1
-    fi
-  done
+    for variable in "${variables[@]}"; do
+        if [[ -z "${!variable}" ]]; then
+            echo "Variable \"${variable}\" is empty or not defined."; exit 1
+        fi
+    done
 }
 
 function get_container_name {
-	local container_list=$(docker container ls)
-	local index=0
-	container_name="${container_base_name}-${index}"
-	
-	while [[ ${container_list} == *${container_name}* ]]; do
-		((index++)); container_name="${container_base_name}-${index}"
-	done
+    local container_list=$(docker container ls)
+    local index=0
+    container_name="${container_base_name}-${index}"
+
+    while [[ ${container_list} == *${container_name}* ]]; do
+        ((index++)); container_name="${container_base_name}-${index}"
+    done
 }
 
 source "$(dirname "${0}")/cmgvariables.sh"

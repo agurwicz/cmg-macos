@@ -31,51 +31,50 @@ remote_workdir="/workdir"
 ########## Customizable ##########
 
 function check_variables {
-  local variables=("$@")
-  local variable
+    local variables=("$@")
+    local variable
 
-  for variable in "${variables[@]}"; do
-    if [[ -z "${!variable}" ]]; then
-      echo "Variable \"${variable}\" is empty or not defined."; exit 1
+    for variable in "${variables[@]}"; do
+        if [[ -z "${!variable}" ]]; then
+            echo "Variable \"${variable}\" is empty or not defined."; exit 1
+        fi
+    done
+
+    if [[ ${user_cmg_commands} == "" ]]; then
+        user_cmg_commands=${cmg_commands}
     fi
-  done
-
-  if [[ ${user_cmg_commands} == "" ]]; then
-    user_cmg_commands=${cmg_commands}
-  fi
 }
 
 function check_docker {
-	local docker=$(which docker)
+    local docker=$(which docker)
 
-	if [[ $docker = "" ]]; then
-		echo "Docker not found."
-		exit 1
-	fi
+    if [[ $docker = "" ]]; then
+        echo "Docker not found."; exit 1
+    fi
 }
 
 function get_simulator {
-	simulator=$(echo "${simulator}" | tr '[:upper:]' '[:lower:]')
+    simulator=$(echo "${simulator}" | tr '[:upper:]' '[:lower:]')
 
-  case ${simulator} in
-    "imex") prefix="mx";;
-    "gem") prefix="gm";;
-    "stars") prefix="st";;
-    *) echo "Simulator not recognized."; exit 1;;
-  esac
+    case ${simulator} in
+        "imex") prefix="mx";;
+        "gem") prefix="gm";;
+        "stars") prefix="st";;
+        *) echo "Simulator not recognized."; exit 1;;
+    esac
 
-  ld_library_path="${simulator}/${cmg_version}/linux_x64/lib"
-	simulator_relative_path="${simulator}/${cmg_version}/linux_x64/exe/${prefix}${cmg_version//\./}.exe"
+    ld_library_path="${simulator}/${cmg_version}/linux_x64/lib"
+    simulator_relative_path="${simulator}/${cmg_version}/linux_x64/exe/${prefix}${cmg_version//\./}.exe"
 }
 
 function get_container_name {
-	local container_list=$(docker container ls)
-	local index=0
-	container_name="${container_base_name}-${index}"
+    local container_list=$(docker container ls)
+    local index=0
+    container_name="${container_base_name}-${index}"
 
-	while [[ ${container_list} == *${container_name}* ]]; do
-		((index++)); container_name="${container_base_name}-${index}"
-	done
+    while [[ ${container_list} == *${container_name}* ]]; do
+        ((index++)); container_name="${container_base_name}-${index}"
+    done
 }
 
 source "$(dirname "${0}")/cmgvariables.sh"
